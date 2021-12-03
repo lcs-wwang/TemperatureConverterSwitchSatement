@@ -13,10 +13,27 @@ struct ContentView: View {
     @State var temperatureInCelsius = 0.0
     
     // MARK: Computed properties
+    // property the logic goes here
     var temperatureInFahrenheit: Double {
         return temperatureInCelsius * 1.8 + 32
     }
-    
+    // to provide suggestion of what to wear based on temp
+    var feedback:String{
+        if temperatureInCelsius >= -50.0 && temperatureInCelsius < -20.0 {
+            return "It's freezing outside! 🥶"
+        } else if temperatureInCelsius >= -20.0 && temperatureInCelsius < 0.0 {
+            return "Dress warmly!"
+        } else if temperatureInCelsius >= 0.0 && temperatureInCelsius < 10.0 {
+            return "Need a coat!"
+        } else if temperatureInCelsius >= 10.0 && temperatureInCelsius < 20.0 {
+            return "Not very cold, not very hot... Perfect!"
+        } else if temperatureInCelsius >= 20.0 && temperatureInCelsius < 30.0 {
+            return "Warm weather! Wear thin layers."
+        } else {
+            return "Never go out! It's too hot. 🥵"
+        }
+    }
+    //"body" property is only for input and output
     var body: some View {
         
         VStack {
@@ -60,19 +77,10 @@ struct ContentView: View {
                 .padding()
             
             //output: what to wear
-            if temperatureInCelsius >= -50.0 && temperatureInCelsius < -20.0 {
-                Text("It's freezing outside! 🥶")
-            } else if temperatureInCelsius >= -20.0 && temperatureInCelsius < 0.0 {
-                Text("Dress warmly!")
-            } else if temperatureInCelsius >= 0.0 && temperatureInCelsius < 10.0 {
-                Text("Need a coat!")
-            } else if temperatureInCelsius >= 10.0 && temperatureInCelsius < 20.0 {
-                Text("Not very cold, not very hot... Perfect!")
-            } else if temperatureInCelsius >= 20.0 && temperatureInCelsius < 30.0 {
-                Text("Warm weather! Wear thin layers.")
-            } else if temperatureInCelsius >= 30.0 && temperatureInCelsius <= 50.0 {
-                Text("Never go out! It's too hot. 🥵")
-            }
+             
+            
+            Text(feedback)
+            
             
             Spacer()
 
